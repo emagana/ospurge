@@ -1,3 +1,12 @@
+Support for Python 2.6 version
+==============================
+
+* This branch provides the required support for python 2.6
+* Community will not accept a commit for this support, this is
+the man reason why we are going to keep it in this separate
+branch and repo.
+
+
 OpenStack project resources cleaner
 ===================================
 
