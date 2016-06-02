@@ -82,7 +82,7 @@ class SwiftObjects(SwiftResources):
                                    container=obj['container'], name=obj['name'])
 
     def resource_str(self, obj):
-        return "object {} in container {}".format(obj['name'], obj['container'])
+        return "object {0} in container {0}".format(obj['name'], obj['container'])
 
 
 class SwiftContainers(SwiftResources):
@@ -96,7 +96,7 @@ class SwiftContainers(SwiftResources):
         swift_client.delete_container(self.endpoint, self.token, container, http_conn=self.http_conn)
 
     def resource_str(self, obj):
-        return "container {}".format(obj)
+        return "container {0}".format(obj)
 
 
 class CinderResources(base.Resources):
@@ -122,7 +122,7 @@ class CinderSnapshots(CinderResources):
         self.client.volume_snapshots.delete(snap)
 
     def resource_str(self, snap):
-        return "snapshot {} (id {})".format(snap.display_name, snap.id)
+        return "snapshot {0} (id {0})".format(snap.display_name, snap.id)
 
 
 class CinderVolumes(CinderResources):
@@ -136,14 +136,13 @@ class CinderVolumes(CinderResources):
         self.client.volumes.delete(vol)
 
     def resource_str(self, vol):
-        return "volume {} (id {})".format(vol.display_name, vol.id)
+        return "volume {0} (id {0})".format(vol.display_name, vol.id)
 
 
 class CinderBackups(CinderResources):
 
     def list(self):
-        if self.session.is_admin and version.LooseVersion(
-                cinderclient.version_info.version_string()) < '1.4.0':
+        if self.session.is_admin:
             logging.warning('cinder volume-backups are ignored when ospurge is '
                             'launched with admin credentials because of the '
                             'following bug: '
@@ -156,7 +155,7 @@ class CinderBackups(CinderResources):
         self.client.backups.delete(backup)
 
     def resource_str(self, backup):
-        return "backup {} (id {}) of volume {}".format(backup.name, backup.id, backup.volume_id)
+        return "backup {0} (id {0}) of volume {0}".format(backup.name, backup.id, backup.volume_id)
 
 
 class NeutronResources(base.Resources):
@@ -199,7 +198,7 @@ class NeutronRouters(NeutronResources):
 
     @staticmethod
     def resource_str(router):
-        return "router {} (id {})".format(router['name'], router['id'])
+        return "router {0} (id {0})".format(router['name'], router['id'])
 
 
 class NeutronInterfaces(NeutronResources):
@@ -221,7 +220,7 @@ class NeutronInterfaces(NeutronResources):
 
     @staticmethod
     def resource_str(interface):
-        return "interface {} (id {})".format(interface['name'],
+        return "interface {0} (id {0})".format(interface['name'],
                                              interface['id'])
 
 
@@ -245,7 +244,7 @@ class NeutronPorts(NeutronResources):
 
     @staticmethod
     def resource_str(port):
-        return "port {} (id {})".format(port['name'], port['id'])
+        return "port {0} (id {0})".format(port['name'], port['id'])
 
 
 class NeutronNetworks(NeutronResources):
@@ -266,7 +265,7 @@ class NeutronNetworks(NeutronResources):
 
     @staticmethod
     def resource_str(net):
-        return "network {} (id {})".format(net['name'], net['id'])
+        return "network {0} (id {0})".format(net['name'], net['id'])
 
 
 class NeutronSecgroups(NeutronResources):
@@ -294,7 +293,7 @@ class NeutronSecgroups(NeutronResources):
 
     @staticmethod
     def resource_str(secgroup):
-        return "security group {} (id {})".format(
+        return "security group {0} (id {0})".format(
             secgroup['name'], secgroup['id'])
 
 
@@ -311,7 +310,7 @@ class NeutronFloatingIps(NeutronResources):
 
     @staticmethod
     def resource_str(floating_ip):
-        return "floating ip {} (id {})".format(
+        return "floating ip {0} (id {0})".format(
             floating_ip['floating_ip_address'], floating_ip['id'])
 
 
@@ -327,7 +326,7 @@ class NeutronLbMembers(NeutronResources):
 
     @staticmethod
     def resource_str(member):
-        return "lb-member {} (id {})".format(member['address'], member['id'])
+        return "lb-member {0} (id {0})".format(member['address'], member['id'])
 
 
 class NeutronLbPool(NeutronResources):
@@ -342,7 +341,7 @@ class NeutronLbPool(NeutronResources):
 
     @staticmethod
     def resource_str(pool):
-        return "lb-pool {} (id {})".format(pool['name'], pool['id'])
+        return "lb-pool {0} (id {0})".format(pool['name'], pool['id'])
 
 
 class NeutronLbVip(NeutronResources):
@@ -357,7 +356,7 @@ class NeutronLbVip(NeutronResources):
 
     @staticmethod
     def resource_str(vip):
-        return "lb-vip {} (id {})".format(vip['name'], vip['id'])
+        return "lb-vip {0} (id {0})".format(vip['name'], vip['id'])
 
 
 class NeutronLbHealthMonitor(NeutronResources):
@@ -372,7 +371,7 @@ class NeutronLbHealthMonitor(NeutronResources):
 
     @staticmethod
     def resource_str(health_monitor):
-        return "lb-health_monotor type {} (id {})".format(
+        return "lb-health_monotor type {0} (id {0})".format(
             health_monitor['type'], health_monitor['id'])
 
 
@@ -388,7 +387,7 @@ class NeutronMeteringLabel(NeutronResources):
 
     @staticmethod
     def resource_str(metering_label):
-        return "meter-label {} (id {})".format(
+        return "meter-label {0} (id {0})".format(
             metering_label['name'], metering_label['id'])
 
 
@@ -404,7 +403,7 @@ class NeutronFireWallPolicy(NeutronResources):
 
     @staticmethod
     def resource_str(firewall_policy):
-        return "Firewall policy {} (id {})".format(
+        return "Firewall policy {0} (id {0})".format(
             firewall_policy['name'], firewall_policy['id'])
 
 
@@ -420,7 +419,7 @@ class NeutronFireWallRule(NeutronResources):
 
     @staticmethod
     def resource_str(firewall_rule):
-        return "Firewall rule {} (id {})".format(
+        return "Firewall rule {0} (id {0})".format(
             firewall_rule['name'], firewall_rule['id'])
 
 
@@ -436,7 +435,7 @@ class NeutronFireWall(NeutronResources):
 
     @staticmethod
     def resource_str(firewall):
-        return "Firewall {} (id {})".format(firewall['name'], firewall['id'])
+        return "Firewall {0} (id {0})".format(firewall['name'], firewall['id'])
 
 
 class NovaServers(base.Resources):
@@ -460,7 +459,7 @@ class NovaServers(base.Resources):
         self.client.servers.delete(server)
 
     def resource_str(self, server):
-        return "server {} (id {})".format(server.name, server.id)
+        return "server {0} (id {0})".format(server.name, server.id)
 
 
 class GlanceImages(base.Resources):
@@ -480,7 +479,7 @@ class GlanceImages(base.Resources):
         self.client.images.delete(image.id)
 
     def resource_str(self, image):
-        return "image {} (id {})".format(image.name, image.id)
+        return "image {0} (id {0})".format(image.name, image.id)
 
     def _owned_resource(self, res):
         # Only considering resources owned by project
@@ -507,7 +506,7 @@ class HeatStacks(base.Resources):
             self.client.stacks.delete(stack.id)
 
     def resource_str(self, stack):
-        return "stack {})".format(stack.id)
+        return "stack {0})".format(stack.id)
 
 
 class CeilometerAlarms(base.Resources):
@@ -534,7 +533,7 @@ class CeilometerAlarms(base.Resources):
         self.client.alarms.delete(alarm.alarm_id)
 
     def resource_str(self, alarm):
-        return "alarm {}".format(alarm.name)
+        return "alarm {0}".format(alarm.name)
 
 
 class KeystoneManager(object):
@@ -581,11 +580,11 @@ class KeystoneManager(object):
         return project_id
 
     def enable_project(self, project_id):
-        logging.info("* Enabling project {}.".format(project_id))
+        logging.info("* Enabling project {0}.".format(project_id))
         self.tenant_info = self.client.tenants.update(project_id, enabled=True)
 
     def disable_project(self, project_id):
-        logging.info("* Disabling project {}.".format(project_id))
+        logging.info("* Disabling project {0}.".format(project_id))
         self.tenant_info = self.client.tenants.update(project_id, enabled=False)
 
     def get_admin_role_id(self):
@@ -597,7 +596,7 @@ class KeystoneManager(object):
     def become_project_admin(self, project_id):
         user_id = self.client.user_id
         admin_role_id = self.get_admin_role_id()
-        logging.info("* Granting role admin to user {} on project {}.".format(
+        logging.info("* Granting role admin to user {0} on project {0}.".format(
             user_id, project_id))
 
         return self.client.roles.add_user_role(user_id, admin_role_id, project_id)
@@ -605,13 +604,13 @@ class KeystoneManager(object):
     def undo_become_project_admin(self, project_id):
         user_id = self.client.user_id
         admin_role_id = self.get_admin_role_id()
-        logging.info("* Removing role admin to user {} on project {}.".format(
+        logging.info("* Removing role admin to user {0} on project {0}.".format(
             user_id, project_id))
 
         return self.client.roles.remove_user_role(user_id, admin_role_id, project_id)
 
     def delete_project(self, project_id):
-        logging.info("* Deleting project {}.".format(project_id))
+        logging.info("* Deleting project {0}.".format(project_id))
         self.client.tenants.delete(project_id)
 
 
@@ -646,7 +645,7 @@ def perform_on_project(admin_name, password, project, auth_url,
                 'improperly configured and returned: {!r}\n'.format(rc, e))
         except (ceilometerclient.exc.InvalidEndpoint, glanceclient.exc.InvalidEndpoint) as e:
             logging.warning(
-                "Unable to connect to {} endpoint : {}".format(rc, e.message))
+                "Unable to connect to {0} endpoint : {0}".format(rc, e.message))
             error = exceptions.InvalidEndpoint(rc)
         except (neutronclient.common.exceptions.NeutronClientException):
             # If service is not configured, ignoring it
@@ -751,7 +750,7 @@ def main():
                                            args.insecure, region_name=args.region_name,
                                            admin_role_name=args.admin_role_name)
     except api_exceptions.Unauthorized as exc:
-        print("Authentication failed: {}".format(str(exc)))
+        print("Authentication failed: {0}".format(str(exc)))
         sys.exit(constants.AUTHENTICATION_FAILED_ERROR_CODE)
 
     remove_admin_role_after_purge = False
@@ -776,10 +775,10 @@ def main():
                 keystone_manager.enable_project(cleanup_project_id)
 
     except api_exceptions.Forbidden as exc:
-        print("Not authorized: {}".format(str(exc)))
+        print("Not authorized: {0}".format(str(exc)))
         sys.exit(constants.NOT_AUTHORIZED_ERROR_CODE)
     except exceptions.NoSuchProject as exc:
-        print("Project {} doesn't exist".format(str(exc)))
+        print("Project {0} doesn't exist".format(str(exc)))
         sys.exit(constants.NO_SUCH_PROJECT_ERROR_CODE)
 
     # Proper cleanup
@@ -789,10 +788,10 @@ def main():
                            args.auth_url, args.endpoint_type, args.region_name,
                            action, args.insecure)
     except requests.exceptions.ConnectionError as exc:
-        print("Connection error: {}".format(str(exc)))
+        print("Connection error: {0}".format(str(exc)))
         sys.exit(constants.CONNECTION_ERROR_CODE)
     except (exceptions.DeletionFailed, exceptions.InvalidEndpoint) as exc:
-        print("Deletion of {} failed".format(str(exc)))
+        print("Deletion of {0} failed".format(str(exc)))
         print("*Warning* Some resources may not have been cleaned up")
         sys.exit(constants.DELETION_FAILED_ERROR_CODE)
 
